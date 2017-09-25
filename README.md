@@ -1,3 +1,4 @@
+Denshchikov Dmitry Alexandrovich
 
 # Java Junior Developer Training Course.
 64 hours training + 16 hours work project = 80 hr.

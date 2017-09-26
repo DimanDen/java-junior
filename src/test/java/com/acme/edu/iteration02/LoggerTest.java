@@ -25,7 +25,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     /*
     TODO: implement Logger solution to match specification as tests
-
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
         //region when
@@ -35,7 +34,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 2");
         Logger.log(0);
         //endregion
-
         //region then
         assertSysoutEquals(
             "str 1\n" +
@@ -45,7 +43,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
         //region when
@@ -55,7 +52,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 2");
         Logger.log(0);
         //endregion
-
         //region then
         assertSysoutEquals(
             "str 1\n" +
@@ -66,7 +62,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
         //region when
@@ -76,7 +71,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 2");
         Logger.log(0);
         //endregion
-
         //region then
         assertSysoutEquals(
             "str 1\n" +
@@ -87,7 +81,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
         //region when
@@ -100,7 +93,6 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log("str 3");
         Logger.log("str 3");
         //endregion
-
         //region then
         assertSysoutEquals(
             "str 1\n" +
@@ -111,6 +103,5 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         );
         //endregion
     }
-
     */
 }

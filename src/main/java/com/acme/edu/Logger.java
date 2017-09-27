@@ -2,7 +2,7 @@ package com.acme.edu;
 
 public class Logger {
 
-    public static String getTextBeforeLog(Object message) {
+    private static String getTextBeforeLog(Object message) {
         String textBeforeLog = "";
 
         if(message != null) {
@@ -22,25 +22,28 @@ public class Logger {
         return textBeforeLog;
     }
 
+    private static void print(String message) {
+        System.out.println(message);
+    }
+
 
     public static void log(String message) {
-        System.out.println(getTextBeforeLog(message) + message);
+        print(getTextBeforeLog(message) + message);
     }
 
     public static void log(char message) {
-        System.out.println(getTextBeforeLog(message) + message);
+        print(getTextBeforeLog(message) + message);
     }
 
     public static void log(int message) {
-        System.out.println(getTextBeforeLog(message) + message);
+        print(getTextBeforeLog(message) + message);
     }
 
     public static void log(byte message) {
-        System.out.println(getTextBeforeLog(message) + message);
+        print(getTextBeforeLog(message) + message);
     }
 
     public static void main(String[] args) {
-        System.out.println("HERE'S JOHNY");
     }
 }
 ////////

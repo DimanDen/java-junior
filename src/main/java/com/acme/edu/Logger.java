@@ -44,33 +44,23 @@ public class Logger {
         buffer.append(message);
     }
 
-
     public static void log(int message) {
         checkCurrentType(Integer.class.toString());
 
         if(Integer.MAX_VALUE - (sequentSum + message) < 0) {
+            printAndResetBuffer();
             clearBuffer();
             buffer.append(Integer.MAX_VALUE);
-            printAndResetBuffer();
 
             sequentSum = - (Integer.MAX_VALUE - (sequentSum + message));
         }
         else {
             sequentSum += message;
             clearBuffer();
+            buffer.append(sequentSum);
         }
-
-
-        buffer.append(sequentSum);
     }
 
     public static void main(String[] args) {
-        //region when
-        Logger.log("str 1");
-        Logger.log(10);
-        Logger.log(Integer.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.loggerStop();
     }
 }

@@ -1,49 +1,59 @@
 package com.acme.edu;
 
 public class Logger {
-
-    private static String getTextBeforeLog(Object message) {
-        String textBeforeLog = "";
-
-        if(message != null) {
-            if(String.class.equals(message.getClass())) {
-                textBeforeLog = "string: ";
-            }
-            else if(Character.class.equals(message.getClass())) {
-                textBeforeLog = "char: ";
-            }
-            else if(Integer.class.equals(message.getClass()) ||
-                    Byte.class.equals(message.getClass())) {
-                textBeforeLog = "primitive: ";
-            }
-        }
+    private static StringBuilder buffer = new StringBuilder("");
+    private static String currentType = "";
+    private static Integer sequentSum = 0;
 
 
-        return textBeforeLog;
+    private static void printAndResetBuffer() {
+        print(buffer);
+        clearBuffer();
     }
 
-    private static void print(String message) {
+    public static void loggerStop() {
+        print(buffer);
+    }
+
+    private static void checkCurrentType(String className) {
+        if(!className.equals(currentType) || currentType.equals("")) {
+
+            if(!currentType.equals("")) {
+                printAndResetBuffer();
+            }
+
+            clearBuffer();
+            sequentSum = 0;
+            currentType = className;
+        }
+    }
+
+    private static void clearBuffer() {
+        buffer.setLength(0);
+    }
+
+
+    private static void print(StringBuilder message) {
         System.out.println(message);
     }
 
 
     public static void log(String message) {
-        print(getTextBeforeLog(message) + message);
+        checkCurrentType(String.class.toString());
+
+        buffer.append(message);
     }
 
-    public static void log(char message) {
-        print(getTextBeforeLog(message) + message);
-    }
 
     public static void log(int message) {
-        print(getTextBeforeLog(message) + message);
-    }
+        checkCurrentType(Integer.class.toString());
 
-    public static void log(byte message) {
-        print(getTextBeforeLog(message) + message);
+        sequentSum += message;
+        clearBuffer();
+        buffer.append(sequentSum);
     }
 
     public static void main(String[] args) {
+
     }
 }
-////////

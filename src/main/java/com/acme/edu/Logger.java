@@ -2,10 +2,10 @@ package com.acme.edu;
 
 public class Logger {
     private static final String PREFIX_ARRAY = "primitives array: ";
+    private static final String DELIMITER = "\r\n";
     private static StringBuilder buffer = new StringBuilder("");
     private static String currentType = "";
 
-    private static StringBuilder sequentStringSum = new StringBuilder("");
     private static Integer counterStringRepeat = 1;
     private static Integer sequentIntSum = 0;
     private static Byte sequentByteSum = 0;
@@ -13,10 +13,14 @@ public class Logger {
     private static void printAndResetBuffer() {
         print(buffer);
         clearBuffer();
+        sequentIntSum = 0;
+        sequentByteSum = 0;
+        counterStringRepeat = 1;
     }
 
     public static void loggerStop() {
         print(buffer);
+        clearBuffer();
     }
 
     private static void checkCurrentType(String className) {
@@ -31,7 +35,6 @@ public class Logger {
             sequentIntSum = 0;
             sequentByteSum = 0;
             counterStringRepeat = 1;
-            sequentStringSum.setLength(0);
 
             currentType = className;
         }
@@ -59,16 +62,16 @@ public class Logger {
             if(counterStringRepeat > 2) {
                 int indexOfEndMessage = buffer.toString().lastIndexOf(message) + message.length();
                 buffer = new StringBuilder(buffer.substring(0, indexOfEndMessage));
-                buffer.append(" (x" + counterStringRepeat + ")" + "\r\n");
+                buffer.append(" (x" + counterStringRepeat + ")" + DELIMITER);
             }
             else {
-                buffer.append(" (x" + counterStringRepeat + ")" + "\r\n");
+                buffer.append(" (x" + counterStringRepeat + ")" + DELIMITER);
             }
 
 
 
         } else {
-            buffer.append(message + "\r\n");
+            buffer.append(message + DELIMITER);
         }
     }
 
@@ -82,7 +85,7 @@ public class Logger {
                 printAndResetBuffer();
                 sequentIntSum = - (Integer.MAX_VALUE - (sequentIntSum + message));
             } else {
-                buffer.append(sequentIntSum + "\r\n");
+                buffer.append(sequentIntSum + DELIMITER);
                 printAndResetBuffer();
                 sequentIntSum = message;
             }
@@ -92,7 +95,7 @@ public class Logger {
             clearBuffer();
 
         }
-        buffer.append(sequentIntSum + "\r\n");
+        buffer.append(sequentIntSum + DELIMITER);
     }
 
     public static void log(byte message) {
@@ -105,7 +108,7 @@ public class Logger {
                 printAndResetBuffer();
                 sequentByteSum = (byte) - (Byte.MAX_VALUE - (sequentIntSum + message));
             } else {
-                buffer.append(sequentByteSum + "\r\n");
+                buffer.append(sequentByteSum + DELIMITER);
                 printAndResetBuffer();
                 sequentByteSum = message;
             }
@@ -115,7 +118,7 @@ public class Logger {
             clearBuffer();
 
         }
-        buffer.append(sequentByteSum + "\r\n");
+        buffer.append(sequentByteSum + DELIMITER);
     }
 
     public static void log(int[] message) {
@@ -125,7 +128,7 @@ public class Logger {
             buffer.append(element + ", ");
         }
         buffer.delete(buffer.length() - 2, buffer.length() + 1);
-        buffer.append("}" + "\r\n");
+        buffer.append("}" + DELIMITER);
         print(buffer);
     }
 

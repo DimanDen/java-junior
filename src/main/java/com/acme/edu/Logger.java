@@ -92,7 +92,7 @@ public class Logger {
     }
 
     public static void log(String message, String prefix) {
-        print(new StringBuilder(prefix + message + "\r\n"));
+        print(new StringBuilder(prefix + message + DELIMITER));
     }
 
     public static void log(int message) {
@@ -102,7 +102,7 @@ public class Logger {
     }
 
     public static void log(int message, String prefix) {
-        print(new StringBuilder(prefix + message + "\r\n"));
+        print(new StringBuilder(prefix + message + DELIMITER));
     }
 
     public static void log(byte message) {
@@ -112,11 +112,11 @@ public class Logger {
     }
 
     public static void log(byte message, String prefix) {
-        print(new StringBuilder(prefix + message + "\r\n"));
+        print(new StringBuilder(prefix + message + DELIMITER));
     }
 
     public static void log(char message, String prefix) {
-        print(new StringBuilder(prefix + message + "\r\n"));
+        print(new StringBuilder(prefix + message + DELIMITER));
     }
 
     public static void log(int[] message) {
@@ -131,11 +131,11 @@ public class Logger {
     }
 
     public static void log(boolean message, String prefix) {
-        print(new StringBuilder(prefix + message + "\r\n"));
+        print(new StringBuilder(prefix + message + DELIMITER));
     }
 
     public static void log(Object message, String prefix) {
-        print(new StringBuilder(prefix + message + "\r\n"));
+        print(new StringBuilder(prefix + message + DELIMITER));
     }
 
     public static void main(String[] args) {

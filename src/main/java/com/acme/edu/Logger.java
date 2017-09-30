@@ -30,7 +30,6 @@ public class Logger {
                 printAndResetBuffer();
             }
 
-
             clearBuffer();
             sequentIntSum = 0;
             sequentByteSum = 0;
@@ -49,6 +48,26 @@ public class Logger {
         System.out.print(message);
     }
 
+    public static long parseDigits(long message, long maxValue, long sequentSum) {
+        clearBuffer();
+        if(maxValue - (sequentSum + message) < 0) {
+            if(sequentSum > message ) {
+                buffer.append(maxValue);
+                printAndResetBuffer();
+                sequentSum = - (maxValue - (sequentSum + message));
+            } else {
+                buffer.append(sequentSum + DELIMITER);
+                printAndResetBuffer();
+                sequentSum = message;
+            }
+        }
+        else {
+            sequentSum += message;
+            clearBuffer();
+
+        }
+        return sequentSum;
+    }
 
     public static void log(String message) {
         checkCurrentType("String");
@@ -63,62 +82,41 @@ public class Logger {
                 int indexOfEndMessage = buffer.toString().lastIndexOf(message) + message.length();
                 buffer = new StringBuilder(buffer.substring(0, indexOfEndMessage));
                 buffer.append(" (x" + counterStringRepeat + ")" + DELIMITER);
-            }
-            else {
+            } else {
                 buffer.append(" (x" + counterStringRepeat + ")" + DELIMITER);
             }
-
-
 
         } else {
             buffer.append(message + DELIMITER);
         }
     }
 
+    public static void log(String message, String prefix) {
+        print(new StringBuilder(prefix + message + "\r\n"));
+    }
+
     public static void log(int message) {
         checkCurrentType("Integer");
-
-        clearBuffer();
-        if(Integer.MAX_VALUE - (sequentIntSum + message) < 0) {
-            if(sequentIntSum > message ) {
-                buffer.append(Integer.MAX_VALUE);
-                printAndResetBuffer();
-                sequentIntSum = - (Integer.MAX_VALUE - (sequentIntSum + message));
-            } else {
-                buffer.append(sequentIntSum + DELIMITER);
-                printAndResetBuffer();
-                sequentIntSum = message;
-            }
-        }
-        else {
-            sequentIntSum += message;
-            clearBuffer();
-
-        }
+        sequentIntSum = (int)parseDigits(message, Integer.MAX_VALUE, sequentIntSum);
         buffer.append(sequentIntSum + DELIMITER);
+    }
+
+    public static void log(int message, String prefix) {
+        print(new StringBuilder(prefix + message + "\r\n"));
     }
 
     public static void log(byte message) {
         checkCurrentType("Byte");
-
-        clearBuffer();
-        if(Byte.MAX_VALUE - (sequentByteSum + message) < 0) {
-            if(sequentByteSum > message ) {
-                buffer.append(Byte.MAX_VALUE);
-                printAndResetBuffer();
-                sequentByteSum = (byte) - (Byte.MAX_VALUE - (sequentIntSum + message));
-            } else {
-                buffer.append(sequentByteSum + DELIMITER);
-                printAndResetBuffer();
-                sequentByteSum = message;
-            }
-        }
-        else {
-            sequentByteSum = (byte)(sequentByteSum + message);
-            clearBuffer();
-
-        }
+        sequentByteSum = (byte)parseDigits(message, Byte.MAX_VALUE, sequentByteSum);
         buffer.append(sequentByteSum + DELIMITER);
+    }
+
+    public static void log(byte message, String prefix) {
+        print(new StringBuilder(prefix + message + "\r\n"));
+    }
+
+    public static void log(char message, String prefix) {
+        print(new StringBuilder(prefix + message + "\r\n"));
     }
 
     public static void log(int[] message) {
@@ -132,7 +130,14 @@ public class Logger {
         print(buffer);
     }
 
-    public static void main(String[] args) {
+    public static void log(boolean message, String prefix) {
+        print(new StringBuilder(prefix + message + "\r\n"));
+    }
 
+    public static void log(Object message, String prefix) {
+        print(new StringBuilder(prefix + message + "\r\n"));
+    }
+
+    public static void main(String[] args) {
     }
 }

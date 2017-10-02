@@ -34,7 +34,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.loggerStop();
         //endregion
         //region then
-        assertSysoutEquals(
+        assertSysoutContains(
             "str 1\r\n" +
             "3\r\n" +
             "str 2\r\n" +

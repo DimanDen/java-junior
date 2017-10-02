@@ -37,7 +37,7 @@ $ java -cp target Demo
 ```
 
 ## Lab: developing simple java app
-- Main and Printer classes
+- Main and com.acme.edu.BufferWorker classes
 - Different packages
 - One of them in JAR
 

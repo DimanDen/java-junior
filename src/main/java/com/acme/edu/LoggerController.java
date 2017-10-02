@@ -1,39 +1,71 @@
 package com.acme.edu;
 
 class LoggerController {
-    private StringBuilder resultBuffer;
+    private StringBuilder resultBuffer = new StringBuilder("");
     private Message prevMessage;
     private Message currentMessage;
 
+    private IntFormatter intFormatter = new IntFormatter();
+    private StringFormatter stringFormatter = new StringFormatter();
+    private ByteFormatter byteFormatter = new ByteFormatter();
+    private Saver saver = new Saver();
 
-    Message getCurrentMessage() {
-        return currentMessage;
-    }
-
-    void setCurrentMessage(Message currentMessage) {
-        this.currentMessage = currentMessage;
-
-        if(prevMessage != null) {
-            currentMessage.setPrevState(prevMessage);
+    private void countResultBuffer() {
+        String temp = "";
+        switch (currentMessage.getContentType().toString()) {
+            case "Integer": {
+                temp = intFormatter.format(resultBuffer, currentMessage.getContent()).toString();
+                break;
+            }
+            case "String": {
+                if (prevMessage != null) {
+                    resultBuffer.append("\r\n");
+                }
+                temp = stringFormatter.format(resultBuffer, currentMessage.getContent()).toString();
+                break;
+            }
+            case "Byte": {
+                temp = byteFormatter.format(resultBuffer, currentMessage.getContent()).toString();
+                break;
+            }
         }
 
-        resultBuffer = new StringBuilder(currentMessage.getSequentBuffer());
-        sentBufferToPrint();
+        if(temp.contains("overflow!")) {
+            saver.save(resultBuffer);
+            resultBuffer.setLength(0);
+            resultBuffer.append(temp.substring(temp.lastIndexOf("overflow!") + "overflow!".length()));
+        } else {
+            resultBuffer.setLength(0);
+            resultBuffer.append(temp);
+        }
     }
 
+    private void accumulate() {
+        if (prevMessage == null
+                || prevMessage.getContentType().toString().equals(currentMessage.getContentType().toString())) {
+            countResultBuffer();
 
-    StringBuilder getResultBuffer() {
-        return resultBuffer;
+        } else {
+            if(!resultBuffer.toString().equals("")) {
+                saver.save(resultBuffer);
+            }
+            resultBuffer.setLength(0);
+            prevMessage = null;
+            countResultBuffer();
+        }
     }
 
-    void setResultBuffer(StringBuilder resultBuffer) {
-        this.resultBuffer = resultBuffer;
-        this.prevMessage = currentMessage;
+    private void setCurrentMessage(Message currentMessage) {
+        this.currentMessage = currentMessage;
     }
 
-    void sentBufferToPrint() {
-        Printer printer = new Printer();
-        printer.print(resultBuffer);
+    void parseMessage(Message currentMessage) {
+        setCurrentMessage(currentMessage);
+        accumulate();
+        setPrevMessage(currentMessage);
     }
 
+    void setPrevMessage(Message prevMessage) {
+        this.prevMessage = prevMessage;
+    }
 }

@@ -28,6 +28,7 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.log(1, "primitive: ");
         Logger.log(0, "primitive: ");
         Logger.log(-1, "primitive: ");
+        Logger.loggerStop();
         //endregion
 
         //region then
@@ -36,12 +37,14 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+
     @Test
     public void shouldLogByte() throws IOException {
         //region when
         Logger.log((byte)1, "primitive: ");
         Logger.log((byte)0, "");
         Logger.log((byte)-1, "");
+        Logger.loggerStop();
         //endregion
 
         //region then
@@ -51,12 +54,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         assertSysoutContains("-1");
         //endregion
     }
-
     @Test
     public void shouldLogChar() throws IOException {
         //region when
         Logger.log('a', "char: ");
         Logger.log('b', "");
+        Logger.loggerStop();
         //endregion
         //region then
         assertSysoutContains("char: ");
@@ -65,11 +68,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+
     @Test
     public void shouldLogString() throws IOException {
         //region when
         Logger.log("test string 1" , "string: ");
         Logger.log("other str", "");
+        Logger.loggerStop();
         //endregion
         //region then
         assertSysoutContains("string: ");
@@ -78,11 +83,13 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+
     @Test
     public void shouldLogBoolean() throws IOException {
         //region when
         Logger.log(true, "primitive: ");
         Logger.log(false, "");
+        Logger.loggerStop();
         //endregion
         //region then
         assertSysoutContains("primitive: ");
@@ -91,14 +98,17 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
     }
 
+
     @Test
     public void shouldLogReference() throws IOException {
         //region when
         Logger.log(new Object(), "reference: ");
+        Logger.loggerStop();
         //endregion
         //region then
         assertSysoutContains("reference: ");
         assertSysoutContains("@");
         //endregion
     }
+
 }

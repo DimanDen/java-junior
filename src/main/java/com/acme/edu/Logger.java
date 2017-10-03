@@ -1,65 +1,27 @@
 package com.acme.edu;
 
+import com.acme.edu.formatter.*;
+import com.acme.edu.message.*;
+
 public class Logger {
     private static LoggerController loggerController = new LoggerController();
 
-    public static void log(int message, String prefix) {
-        Message messageWithPrefix = new Message();
-
-        messageWithPrefix.setContent(new StringBuilder(prefix + String.valueOf(message)));
-        messageWithPrefix.setContentType(new StringBuilder("String"));
-
-        loggerController.parseMessage(messageWithPrefix);
+    public static void log(Object message) {
+        loggerController.parseMessage(new ReferenceMessage(new StringBuilder(String.valueOf(message)),
+                new ReferenceFormatter()));
     }
 
-    public static void log(byte message, String prefix) {
-        Message messageWithPrefix = new Message();
-
-        messageWithPrefix.setContent(new StringBuilder(prefix + String.valueOf(message)));
-        messageWithPrefix.setContentType(new StringBuilder("String"));
-
-        loggerController.parseMessage(messageWithPrefix);
+    public static void log(boolean message) {
+        loggerController.parseMessage(new BooleanMessage(new StringBuilder(String.valueOf(message)),
+                new BooleanFormatter()));
     }
 
-    public static void log(char message, String prefix) {
-        Message messageWithPrefix = new Message();
-
-        messageWithPrefix.setContent(new StringBuilder(prefix + String.valueOf(message)));
-        messageWithPrefix.setContentType(new StringBuilder("String"));
-
-        loggerController.parseMessage(messageWithPrefix);
+    public static void log(char message) {
+        loggerController.parseMessage(new CharMessage(new StringBuilder(String.valueOf(message)),
+                new CharFormatter()));
     }
 
-    public static void log(String message, String prefix) {
-        Message messageWithPrefix = new Message();
-
-        messageWithPrefix.setContent(new StringBuilder(prefix + String.valueOf(message)));
-        messageWithPrefix.setContentType(new StringBuilder("String"));
-
-        loggerController.parseMessage(messageWithPrefix);
-    }
-
-    public static void log(Boolean message, String prefix) {
-        Message messageWithPrefix = new Message();
-
-        messageWithPrefix.setContent(new StringBuilder(prefix + String.valueOf(message)));
-        messageWithPrefix.setContentType(new StringBuilder("String"));
-
-        loggerController.parseMessage(messageWithPrefix);
-    }
-
-    public static void log(Object message, String prefix) {
-        Message messageWithPrefix = new Message();
-
-        messageWithPrefix.setContent(new StringBuilder(prefix + String.valueOf(message)));
-        messageWithPrefix.setContentType(new StringBuilder("String"));
-
-        loggerController.parseMessage(messageWithPrefix);
-    }
-
-    public static void log(int[] message, String prefix) {
-        Message messageWithPrefix = new Message();
-
+    public static void log(int[] message) {
         StringBuilder tempString = new StringBuilder("{");
         for(int i : message) {
             tempString.append(i + ", ");
@@ -67,46 +29,28 @@ public class Logger {
         tempString.setLength(tempString.length() - 2);
         tempString.append("}");
 
-        messageWithPrefix.setContent(new StringBuilder(prefix + tempString));
-        messageWithPrefix.setContentType(new StringBuilder("String"));
-
-        loggerController.parseMessage(messageWithPrefix);
+        loggerController.parseMessage(new ArrayOfIntMessage(new StringBuilder(tempString),
+                new ArrayOfIntFormatter()));
     }
 
     public static void log(int message) {
-        Message intMessage = new Message();
-
-        intMessage.setContent(new StringBuilder(String.valueOf(message)));
-        intMessage.setContentType(new StringBuilder("Integer"));
-
-        loggerController.parseMessage(intMessage);
+        loggerController.parseMessage(new IntMessage(new StringBuilder(String.valueOf(message)),
+                new IntFormatter()));
     }
 
     public static void log(String message) {
-        Message stringMessage = new Message();
-
-        stringMessage.setContent(new StringBuilder(String.valueOf(message)));
-        stringMessage.setContentType(new StringBuilder("String"));
-
-        loggerController.parseMessage(stringMessage);
+        loggerController.parseMessage(new StringMessage(new StringBuilder(String.valueOf(message)),
+                new StringFormatter()));
     }
 
     public static void log(byte message) {
-        Message stringMessage = new Message();
-
-        stringMessage.setContent(new StringBuilder(String.valueOf(message)));
-        stringMessage.setContentType(new StringBuilder("Byte"));
-
-        loggerController.parseMessage(stringMessage);
+        loggerController.parseMessage(new ByteMessage(new StringBuilder(String.valueOf(message)),
+                new ByteFormatter()));
     }
 
     public static void loggerStop() {
-        Message stopSignalMessage = new Message();
-
-        stopSignalMessage.setContent(new StringBuilder(""));
-        stopSignalMessage.setContentType(new StringBuilder("StopSignal"));
-
-        loggerController.parseMessage(stopSignalMessage);
+        loggerController.parseMessage(new StopMessage(new StringBuilder(""),
+                new StringFormatter()));
     }
 
     public static void main(String[] args) {

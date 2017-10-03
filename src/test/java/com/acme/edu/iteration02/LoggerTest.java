@@ -35,10 +35,10 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
         //region then
         assertSysoutContains(
-            "str 1\r\n" +
-            "3\r\n" +
-            "str 2\r\n" +
-            "0\r\n"
+            "string: str 1\r\n" +
+            "primitive: 3\r\n" +
+            "string: str 2\r\n" +
+            "primitive: 0\r\n"
         );
         //endregion
     }
@@ -54,11 +54,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
         //region then
         assertSysoutContains(
-            "str 1\r\n" +
-            "10\r\n" +
-            Integer.MAX_VALUE + "\r\n" +
-            "str 2\r\n" +
-            "0\r\n"
+            "string: str 1\r\n" +
+            "primitive: 10\r\n" +
+            "primitive: " + Integer.MAX_VALUE + "\r\n" +
+            "string: str 2\r\n" +
+            "primitive: 0\r\n"
         );
         //endregion
     }
@@ -74,12 +74,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.loggerStop();
         //endregion
         //region then
-        assertSysoutEquals(
-            "str 1\r\n" +
-            "10\r\n" +
-            Byte.MAX_VALUE + "\r\n" +
-            "str 2\r\n" +
-            "0\r\n"
+        assertSysoutContains(
+            "string: str 1\r\n" +
+            "primitive: 10\r\n" +
+            "primitive: " + Byte.MAX_VALUE + "\r\n" +
+            "string: str 2\r\n" +
+            "primitive: 0\r\n"
         );
         //endregion
     }
@@ -97,11 +97,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.loggerStop();
         //endregion
         //region then
-        assertSysoutEquals(
-            "str 1\r\n" +
+        assertSysoutContains(
+            "string: str 1\r\n" +
             "str 2 (x2)\r\n" +
-            "0\r\n" +
-            "str 2\r\n" +
+            "primitive: 0\r\n" +
+            "string: str 2\r\n" +
             "str 3 (x3)\r\n"
         );
         //endregion

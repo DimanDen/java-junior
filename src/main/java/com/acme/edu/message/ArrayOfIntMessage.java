@@ -6,8 +6,6 @@ import com.acme.edu.formatter.Formatter;
 import java.lang.reflect.Array;
 
 public class ArrayOfIntMessage extends Message {
-    Saver saver = new Saver();
-
     public ArrayOfIntMessage(StringBuilder content, Formatter formatter) {
         super(content, formatter);
     }

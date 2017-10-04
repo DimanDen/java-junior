@@ -4,7 +4,7 @@ import com.acme.edu.Saver;
 import com.acme.edu.formatter.Formatter;
 
 public class ByteMessage extends Message {
-    Saver saver = new Saver();
+    private Saver saver = new Saver();
 
     public ByteMessage(StringBuilder content, Formatter formatter) {
         super(content, formatter);

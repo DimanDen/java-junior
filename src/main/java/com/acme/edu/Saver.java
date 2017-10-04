@@ -1,6 +1,8 @@
 package com.acme.edu;
+import static java.lang.System.lineSeparator;
 
 public class Saver {
+    private final String SEPARATOR = "\r\n";
     public void save(StringBuilder message) {
         message = checkOutput(message);
         if(!message.toString().equals("")) {
@@ -10,7 +12,7 @@ public class Saver {
 
     private StringBuilder checkOutput(StringBuilder message) {
         String temp = message.toString();
-        if(temp.contains("\r\n") && temp.substring(temp.length() - 2).equals("\r\n"))
+        if(temp.contains(SEPARATOR) && temp.substring(temp.length() - 2).equals(SEPARATOR))
         {
             message.setLength(temp.length() - 2);
         }

@@ -6,6 +6,7 @@ public class StringMessage extends Message {
     public StringMessage(StringBuilder content, Formatter formatter) {
         super(content, formatter);
     }
+    private final String SEPARATOR = "\r\n";
 
     @Override
     public void formatContent(StringBuilder prevContent) {
@@ -16,7 +17,7 @@ public class StringMessage extends Message {
 
 
         if(prevVal.toString().contains(getContent())) {
-            prevVal.setLength(prevVal.toString().lastIndexOf("\r\n"));
+            prevVal.setLength(prevVal.toString().lastIndexOf(SEPARATOR));
 
             int beginOfCounter = prevVal.toString().lastIndexOf(" (x");
             if(beginOfCounter != -1) {
@@ -38,7 +39,7 @@ public class StringMessage extends Message {
             temp.append(prevContent.append(getContent()));
 
         }
-        temp.append("\r\n");
+        temp.append(SEPARATOR);
         setContent(temp);
     }
 

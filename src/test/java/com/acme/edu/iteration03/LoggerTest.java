@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.io.IOException;
 
+import static java.lang.System.lineSeparator;
+
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
     @Before
@@ -29,8 +31,8 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.loggerStop();
         //endregion
         //region then
-        assertSysoutContains(
-            "primitives array: {-1, 0, 1}"
+        assertSysoutEquals(
+            "primitives array: {-1, 0, 1}" + lineSeparator()
         );
         //endregion
     }

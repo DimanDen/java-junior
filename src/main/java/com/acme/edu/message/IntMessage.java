@@ -3,8 +3,7 @@ import com.acme.edu.Saver;
 import com.acme.edu.formatter.Formatter;
 
 public class IntMessage extends Message {
-    Saver saver = new Saver();
-
+    private Saver saver = new Saver();
     public IntMessage(StringBuilder content, Formatter formatter) {
         super(content, formatter);
     }

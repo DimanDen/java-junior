@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.IOException;
+import static java.lang.System.lineSeparator;
 
 public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     //region given
@@ -34,11 +35,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.loggerStop();
         //endregion
         //region then
-        assertSysoutContains(
-            "string: str 1\r\n" +
-            "primitive: 3\r\n" +
-            "string: str 2\r\n" +
-            "primitive: 0\r\n"
+        assertSysoutEquals(
+            "string: str 1" + lineSeparator() +
+            "primitive: 3" + lineSeparator() +
+            "string: str 2" + lineSeparator() +
+            "primitive: 0" + lineSeparator()
         );
         //endregion
     }
@@ -54,11 +55,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
         //region then
         assertSysoutContains(
-            "string: str 1\r\n" +
-            "primitive: 10\r\n" +
-            "primitive: " + Integer.MAX_VALUE + "\r\n" +
-            "string: str 2\r\n" +
-            "primitive: 0\r\n"
+            "string: str 1" + lineSeparator() +
+            "primitive: 10" + lineSeparator() +
+            "primitive: " + Integer.MAX_VALUE + lineSeparator() +
+            "string: str 2" + lineSeparator() +
+            "primitive: 0" + lineSeparator()
         );
         //endregion
     }
@@ -75,11 +76,11 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         //endregion
         //region then
         assertSysoutContains(
-            "string: str 1\r\n" +
-            "primitive: 10\r\n" +
-            "primitive: " + Byte.MAX_VALUE + "\r\n" +
-            "string: str 2\r\n" +
-            "primitive: 0\r\n"
+            "string: str 1" + lineSeparator() +
+            "primitive: 10" + lineSeparator() +
+            "primitive: " + Byte.MAX_VALUE + lineSeparator() +
+            "string: str 2" + lineSeparator() +
+            "primitive: 0" + lineSeparator()
         );
         //endregion
     }
@@ -97,12 +98,12 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
         Logger.loggerStop();
         //endregion
         //region then
-        assertSysoutContains(
-            "string: str 1\r\n" +
-            "str 2 (x2)\r\n" +
-            "primitive: 0\r\n" +
-            "string: str 2\r\n" +
-            "str 3 (x3)\r\n"
+        assertSysoutEquals(
+            "string: str 1" + lineSeparator() +
+            "str 2 (x2)" + lineSeparator() +
+            "primitive: 0" + lineSeparator() +
+            "string: str 2" + lineSeparator() +
+            "str 3 (x3)" + lineSeparator()
         );
         //endregion
     }

@@ -4,8 +4,6 @@ import com.acme.edu.Saver;
 import com.acme.edu.formatter.Formatter;
 
 public class CharMessage extends Message {
-    Saver saver = new Saver();
-
     public CharMessage(StringBuilder content, Formatter formatter) {
         super(content, formatter);
     }

@@ -26,18 +26,9 @@ public class StringMessage extends Message {
                 prevVal.setLength(beginOfCounter);
             }
 
-//            if(prevContent.toString() != "") {
-//                temp.append("\r\n");
-//            }
             temp.append(prevVal.append(" (x").append(tempNumbOfRepeatStr).append(")"));
-//            temp.append("\r\n");
         } else {
-
-//            if(prevContent.toString() != "") {
-//                temp.append("\r\n");
-//            }
             temp.append(prevContent.append(getContent()));
-
         }
         temp.append(SEPARATOR);
         setContent(temp);

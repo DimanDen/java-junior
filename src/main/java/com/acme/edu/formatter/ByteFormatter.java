@@ -1,7 +1,5 @@
 package com.acme.edu.formatter;
 
-import com.acme.edu.formatter.Formatter;
-
 public class ByteFormatter implements Formatter {
     private final String BYTE_PREFIX = "primitive: ";
 

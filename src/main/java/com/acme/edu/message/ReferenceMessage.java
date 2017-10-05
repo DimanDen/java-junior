@@ -1,6 +1,4 @@
 package com.acme.edu.message;
-
-import com.acme.edu.Saver;
 import com.acme.edu.formatter.Formatter;
 
 public class ReferenceMessage extends Message {

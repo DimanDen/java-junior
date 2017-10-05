@@ -9,18 +9,22 @@ public class IntMessage extends Message {
     }
 
     @Override
-    public void formatContent(StringBuilder prevContent) {
+    public void formatContent(StringBuilder prevContent) throws IllegalArgumentException {
         StringBuilder temp = new StringBuilder("");
         int prevVal;
         int currentVal;
 
-        if(prevContent.length() == 0) {
-            prevVal = 0;
-        } else {
-            prevVal = Integer.parseInt(prevContent.toString());
+        try {
+            if(prevContent.length() == 0) {
+                prevVal = 0;
+            } else {
+                prevVal = Integer.parseInt(prevContent.toString());
+            }
+            currentVal = Integer.parseInt(getContent().toString());
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("illegal argument", e);
         }
 
-        currentVal = Integer.parseInt(getContent().toString());
 
         if(Integer.MAX_VALUE - (prevVal + currentVal) < 0) {
             if(prevVal > currentVal ) {

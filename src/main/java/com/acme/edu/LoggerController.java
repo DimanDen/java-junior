@@ -19,7 +19,16 @@ class LoggerController {
                 tempStr.append(prevMessage.getContent());
             }
         }
-        currentMessage.formatContent(tempStr);
+
+        try {
+            currentMessage.formatContent(tempStr);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Значение для журналирования является");
+            System.out.println("некорректным для данного типа.");
+            System.out.println("Суммирование проводится не будет");
+        }
+
+
         prevMessage = currentMessage;
     }
 }

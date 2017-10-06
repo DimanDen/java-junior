@@ -1,4 +1,5 @@
 package com.acme.edu.message;
+import com.acme.edu.SaverException;
 import com.acme.edu.formatter.*;
 
 public abstract class Message {
@@ -22,7 +23,7 @@ public abstract class Message {
         return formatter;
     }
 
-    public abstract void formatContent(StringBuilder prevContent);
+    public abstract void formatContent(StringBuilder prevContent) throws SaverException;
     public abstract boolean isSameType(Message prevMessage);
     public abstract void concatenateWithPrefix();
 }

@@ -5,7 +5,7 @@ class LoggerController {
     private Message prevMessage;
     private Saver saver = new Saver();
 
-    void parseMessage(Message currentMessage) {
+    void parseMessage(Message currentMessage) throws LoggerControllerException {
         StringBuilder tempStr = new StringBuilder();
 
         if(prevMessage == null) {
@@ -13,7 +13,15 @@ class LoggerController {
         } else {
             if(!currentMessage.isSameType(prevMessage)) {
                 prevMessage.concatenateWithPrefix();
-                saver.save(prevMessage.getContent());
+
+
+                try {
+                    saver.save(prevMessage.getContent());
+                } catch(SaverException e) {
+                    throw new LoggerControllerException("logger controller exception", e);
+                }
+
+
                 tempStr.append("");
             } else {
                 tempStr.append(prevMessage.getContent());
@@ -22,13 +30,17 @@ class LoggerController {
 
         try {
             currentMessage.formatContent(tempStr);
-        } catch (IllegalArgumentException e) {
-            System.out.println("Значение для журналирования является");
-            System.out.println("некорректным для данного типа.");
-            System.out.println("Суммирование проводится не будет");
+        } catch (IllegalArgumentException | SaverException e) {
+            throw new LoggerControllerException("logger controller exception", e);
         }
 
 
         prevMessage = currentMessage;
+    }
+}
+
+class LoggerControllerException extends SaverException {
+    LoggerControllerException(String message, Throwable cause) {
+        super(message, cause);
     }
 }

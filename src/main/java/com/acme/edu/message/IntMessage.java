@@ -2,6 +2,8 @@ package com.acme.edu.message;
 import com.acme.edu.Saver;
 import com.acme.edu.formatter.Formatter;
 
+import java.util.zip.DataFormatException;
+
 public class IntMessage extends Message {
     private Saver saver = new Saver();
     public IntMessage(StringBuilder content, Formatter formatter) {
@@ -22,7 +24,7 @@ public class IntMessage extends Message {
             }
             currentVal = Integer.parseInt(getContent().toString());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("illegal argument", e);
+            throw new IllegalArgumentException("int message illegal argument", e);
         }
 
 
@@ -37,7 +39,12 @@ public class IntMessage extends Message {
 
             setContent(temp);
             concatenateWithPrefix();
-            saver.save(getContent());
+
+            try {
+                saver.save(getContent());
+            } catch(Exception e) {
+                throw new IllegalArgumentException("logger controller exception", e);
+            }
 
             temp.setLength(0);
             temp.append(prevVal);
@@ -50,6 +57,9 @@ public class IntMessage extends Message {
 
     @Override
     public boolean isSameType(Message prevMessage) {
+        if(prevMessage == null) {
+            return false;
+        }
         return prevMessage instanceof IntMessage;
     }
 
@@ -57,4 +67,5 @@ public class IntMessage extends Message {
     public void concatenateWithPrefix() {
         getFormatter().formatMessage(getContent());
     }
+
 }

@@ -26,14 +26,19 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogSequentIntegersAsSum() throws IOException {
-        //region when
-        Logger.log("str 1");
-        Logger.log(1);
-        Logger.log(2);
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.loggerStop();
-        //endregion
+        try {
+            //region when
+            Logger.log("str 1");
+            Logger.log(1);
+            Logger.log(2);
+            Logger.log("str 2");
+            Logger.log(0);
+            Logger.loggerStop();
+            //endregion
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //region then
         assertSysoutEquals(
             "string: str 1" + lineSeparator() +
@@ -45,14 +50,19 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     @Test
     public void shouldLogCorrectlyIntegerOverflowWhenSequentIntegers() {
-        //region when
-        Logger.log("str 1");
-        Logger.log(10);
-        Logger.log(Integer.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.loggerStop();
-        //endregion
+        try {
+            //region when
+            Logger.log("str 1");
+            Logger.log(10);
+            Logger.log(Integer.MAX_VALUE);
+            Logger.log("str 2");
+            Logger.log(0);
+            Logger.loggerStop();
+            //endregion
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //region then
         assertSysoutContains(
             "string: str 1" + lineSeparator() +
@@ -66,14 +76,19 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
 
     @Test
     public void shouldLogCorrectlyByteOverflowWhenSequentBytes() {
-        //region when
-        Logger.log("str 1");
-        Logger.log((byte)10);
-        Logger.log((byte)Byte.MAX_VALUE);
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.loggerStop();
-        //endregion
+        try {
+            //region when
+            Logger.log("str 1");
+            Logger.log((byte)10);
+            Logger.log((byte)Byte.MAX_VALUE);
+            Logger.log("str 2");
+            Logger.log(0);
+            Logger.loggerStop();
+            //endregion
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //region then
         assertSysoutContains(
             "string: str 1" + lineSeparator() +
@@ -86,17 +101,22 @@ public class LoggerTest implements SysoutCaptureAndAssertionAbility {
     }
     @Test
     public void shouldLogSameSubsequentStringsWithoutRepeat() throws IOException {
-        //region when
-        Logger.log("str 1");
-        Logger.log("str 2");
-        Logger.log("str 2");
-        Logger.log(0);
-        Logger.log("str 2");
-        Logger.log("str 3");
-        Logger.log("str 3");
-        Logger.log("str 3");
-        Logger.loggerStop();
-        //endregion
+        try {
+            //region when
+            Logger.log("str 1");
+            Logger.log("str 2");
+            Logger.log("str 2");
+            Logger.log(0);
+            Logger.log("str 2");
+            Logger.log("str 3");
+            Logger.log("str 3");
+            Logger.log("str 3");
+            Logger.loggerStop();
+            //endregion
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         //region then
         assertSysoutEquals(
             "string: str 1" + lineSeparator() +

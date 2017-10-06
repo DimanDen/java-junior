@@ -1,6 +1,7 @@
 package com.acme.edu.message;
 
 import com.acme.edu.Saver;
+import com.acme.edu.SaverException;
 import com.acme.edu.formatter.Formatter;
 
 public class ByteMessage extends Message {
@@ -11,7 +12,7 @@ public class ByteMessage extends Message {
     }
 
     @Override
-    public void formatContent(StringBuilder prevContent) {
+    public void formatContent(StringBuilder prevContent) throws SaverException {
         StringBuilder temp = new StringBuilder("");
         int prevVal;
         int currentVal;

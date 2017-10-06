@@ -1,4 +1,7 @@
 package com.acme.edu;
+
+import com.acme.edu.Exceptions.LoggerControllerException;
+import com.acme.edu.Exceptions.SaverException;
 import com.acme.edu.message.*;
 
 class LoggerController {
@@ -8,16 +11,16 @@ class LoggerController {
     void parseMessage(Message currentMessage) throws LoggerControllerException {
         StringBuilder tempStr = new StringBuilder();
 
-        if(prevMessage == null) {
+        if (prevMessage == null) {
             tempStr.append("");
         } else {
-            if(!currentMessage.isSameType(prevMessage)) {
+            if (!currentMessage.isSameType(prevMessage)) {
                 prevMessage.concatenateWithPrefix();
 
 
                 try {
                     saver.save(prevMessage.getContent());
-                } catch(SaverException e) {
+                } catch (SaverException e) {
                     throw new LoggerControllerException("logger controller exception", e);
                 }
 
@@ -39,8 +42,3 @@ class LoggerController {
     }
 }
 
-class LoggerControllerException extends SaverException {
-    LoggerControllerException(String message, Throwable cause) {
-        super(message, cause);
-    }
-}

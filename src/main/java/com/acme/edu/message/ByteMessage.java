@@ -1,7 +1,7 @@
 package com.acme.edu.message;
 
 import com.acme.edu.Saver;
-import com.acme.edu.SaverException;
+import com.acme.edu.Exceptions.SaverException;
 import com.acme.edu.formatter.Formatter;
 
 public class ByteMessage extends Message {

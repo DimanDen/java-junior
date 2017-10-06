@@ -1,5 +1,7 @@
 package com.acme.edu;
 
+import com.acme.edu.Exceptions.FacadeLoggerException;
+import com.acme.edu.Exceptions.LoggerControllerException;
 import com.acme.edu.formatter.*;
 import com.acme.edu.message.*;
 
@@ -89,8 +91,3 @@ public class Logger {
     }
 }
 
-class FacadeLoggerException extends LoggerControllerException {
-    FacadeLoggerException(String message, Throwable cause) {
-        super(message, cause);
-    }
-}

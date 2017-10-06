@@ -2,8 +2,6 @@ package com.acme.edu.message;
 import com.acme.edu.Saver;
 import com.acme.edu.formatter.Formatter;
 
-import java.util.zip.DataFormatException;
-
 public class IntMessage extends Message {
     private Saver saver = new Saver();
     public IntMessage(StringBuilder content, Formatter formatter) {
@@ -15,7 +13,6 @@ public class IntMessage extends Message {
         StringBuilder temp = new StringBuilder("");
         int prevVal;
         int currentVal;
-
         try {
             if(prevContent.length() == 0) {
                 prevVal = 0;
